@@ -11,12 +11,6 @@ import SwiftUI
 struct ContentView: View {
 
     let playURI = "spotify:track:2xLMifQCjDGFmkHkpNLD9h"
-
-    var appRemote: SPTAppRemote? {
-        get {
-            return (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.appRemote
-        }
-    }
     
     var body: some View {
         VStack {

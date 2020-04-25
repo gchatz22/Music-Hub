@@ -67,7 +67,7 @@
 			<string>com.Giannis.Music-Hub</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>com.Giannis.Music-Hub</string>
+				<string>music-hub</string>
 			</array>
 		</dict>
 	</array>
