@@ -15,11 +15,12 @@
 		956F80442450706D004F5EBA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 956F80422450706D004F5EBA /* LaunchScreen.storyboard */; };
 		956F804F2450706D004F5EBA /* Music_HubTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 956F804E2450706D004F5EBA /* Music_HubTests.swift */; };
 		956F805A2450706D004F5EBA /* Music_HubUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 956F80592450706D004F5EBA /* Music_HubUITests.swift */; };
+		95CB9F9E2455F28E00AD0C75 /* Controller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95CB9F9D2455F28E00AD0C75 /* Controller.swift */; };
+		95CB9FA02455F2A600AD0C75 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95CB9F9F2455F2A600AD0C75 /* User.swift */; };
+		95CB9FA22455F2B300AD0C75 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95CB9FA12455F2B300AD0C75 /* Player.swift */; };
+		95CB9FA42455F55100AD0C75 /* Archive in Resources */ = {isa = PBXBuildFile; fileRef = 95CB9FA32455F55100AD0C75 /* Archive */; };
 		95CD7304245097D6008A9AA9 /* SpotifyiOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 956F8067245071F5004F5EBA /* SpotifyiOS.framework */; };
 		95D52DF6245110A200397DA0 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95D52DF5245110A200397DA0 /* Constants.swift */; };
-		95D52DFE245327C500397DA0 /* SPTUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95D52DFD245327C500397DA0 /* SPTUser.swift */; };
-		95D52E0224532A9F00397DA0 /* PlayerQueueController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95D52E0124532A9F00397DA0 /* PlayerQueueController.swift */; };
-		95D52E0424532F3900397DA0 /* PlayerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95D52E0324532F3900397DA0 /* PlayerController.swift */; };
 		95D52E0624536EEA00397DA0 /* Song.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95D52E0524536EEA00397DA0 /* Song.swift */; };
 /* End PBXBuildFile section */
 
@@ -57,10 +58,11 @@
 		956F805B2450706D004F5EBA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		956F8067245071F5004F5EBA /* SpotifyiOS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SpotifyiOS.framework; sourceTree = "<group>"; };
 		956F806D2450728A004F5EBA /* Music-Hub-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Music-Hub-Bridging-Header.h"; sourceTree = "<group>"; };
+		95CB9F9D2455F28E00AD0C75 /* Controller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Controller.swift; sourceTree = "<group>"; };
+		95CB9F9F2455F2A600AD0C75 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		95CB9FA12455F2B300AD0C75 /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
+		95CB9FA32455F55100AD0C75 /* Archive */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Archive; sourceTree = "<group>"; };
 		95D52DF5245110A200397DA0 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
-		95D52DFD245327C500397DA0 /* SPTUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SPTUser.swift; sourceTree = "<group>"; };
-		95D52E0124532A9F00397DA0 /* PlayerQueueController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerQueueController.swift; sourceTree = "<group>"; };
-		95D52E0324532F3900397DA0 /* PlayerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerController.swift; sourceTree = "<group>"; };
 		95D52E0524536EEA00397DA0 /* Song.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Song.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -99,6 +101,7 @@
 				956F80352450706C004F5EBA /* Products */,
 				956F8067245071F5004F5EBA /* SpotifyiOS.framework */,
 				956F806D2450728A004F5EBA /* Music-Hub-Bridging-Header.h */,
+				95CB9FA32455F55100AD0C75 /* Archive */,
 			);
 			sourceTree = "<group>";
 		};
@@ -117,9 +120,9 @@
 			children = (
 				956F80372450706C004F5EBA /* AppDelegate.swift */,
 				956F80392450706C004F5EBA /* SceneDelegate.swift */,
-				95D52DFD245327C500397DA0 /* SPTUser.swift */,
-				95D52E0124532A9F00397DA0 /* PlayerQueueController.swift */,
-				95D52E0324532F3900397DA0 /* PlayerController.swift */,
+				95CB9F9D2455F28E00AD0C75 /* Controller.swift */,
+				95CB9F9F2455F2A600AD0C75 /* User.swift */,
+				95CB9FA12455F2B300AD0C75 /* Player.swift */,
 				95D52E0524536EEA00397DA0 /* Song.swift */,
 				95D52DF5245110A200397DA0 /* Constants.swift */,
 				956F803B2450706C004F5EBA /* ContentView.swift */,
@@ -262,6 +265,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				956F80442450706D004F5EBA /* LaunchScreen.storyboard in Resources */,
+				95CB9FA42455F55100AD0C75 /* Archive in Resources */,
 				956F80412450706D004F5EBA /* Preview Assets.xcassets in Resources */,
 				956F803E2450706D004F5EBA /* Assets.xcassets in Resources */,
 			);
@@ -288,13 +292,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				95CB9FA22455F2B300AD0C75 /* Player.swift in Sources */,
+				95CB9F9E2455F28E00AD0C75 /* Controller.swift in Sources */,
 				956F80382450706C004F5EBA /* AppDelegate.swift in Sources */,
-				95D52E0424532F3900397DA0 /* PlayerController.swift in Sources */,
 				956F803A2450706C004F5EBA /* SceneDelegate.swift in Sources */,
-				95D52E0224532A9F00397DA0 /* PlayerQueueController.swift in Sources */,
 				95D52E0624536EEA00397DA0 /* Song.swift in Sources */,
 				956F803C2450706C004F5EBA /* ContentView.swift in Sources */,
-				95D52DFE245327C500397DA0 /* SPTUser.swift in Sources */,
+				95CB9FA02455F2A600AD0C75 /* User.swift in Sources */,
 				95D52DF6245110A200397DA0 /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -392,7 +396,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -446,7 +450,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;

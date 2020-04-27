@@ -15,13 +15,7 @@ struct ContentView: View {
     var body: some View {
         VStack {
             Button(action: {
-//                if self.appRemote?.isConnected == true {
-////                    self.appRemote?.connect()
-//                    self.appRemote?.authorizeAndPlayURI(self.playURI)
-//                } else {
-//                    print("App remote is not connected")
-//                }
-
+                // do something
 
             }){
                 Text("Connect to your Spotify account")

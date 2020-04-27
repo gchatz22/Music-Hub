@@ -10,9 +10,6 @@ import Foundation
 
 class SPTUser: NSObject, SPTAppRemoteDelegate, SPTAppRemotePlayerStateDelegate/*, SPTSessionManagerDelegate*/{
     
-//    let SpotifyClientID: String  = ""
-//    let SpotifyRedirectURL: URL  = Constants.SpotifyRedirectURL
-    
     var songChangeCallback: () -> ()
     var currentSong: Song
     var playing: Bool = false
@@ -41,6 +38,9 @@ class SPTUser: NSObject, SPTAppRemoteDelegate, SPTAppRemotePlayerStateDelegate/*
         accessToken = "invalid"
     }
     
+    func getUserAPI() -> SPTAppRemotePlayerAPI? {
+        return self.appRemote.playerAPI
+    }
 
     
     func setSongChangeCallback(songChangeCallback: @escaping () -> ()) {
@@ -160,14 +160,14 @@ class SPTUser: NSObject, SPTAppRemoteDelegate, SPTAppRemotePlayerStateDelegate/*
     }
     
     func reactivate() {
-        
+        print("reactivating")
         if let _ = self.appRemote.connectionParameters.accessToken {
             self.appRemote.connect()
         }
     }
     
     func deactivate() {
-        
+        print("deactivating")
         if self.appRemote.isConnected {
             self.appRemote.disconnect()
         }

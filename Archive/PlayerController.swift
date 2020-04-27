@@ -8,7 +8,6 @@
 
 import Foundation
 
-
 class PlayerController: NSObject{
     
     static let shared = PlayerController()
@@ -21,6 +20,10 @@ class PlayerController: NSObject{
         spotifyPlayer = SPTUser()
         queueController = PlayerQueueController()
 //        spotifyIsConnected = false
+    }
+    
+    func getUserAPI() -> SPTAppRemotePlayerAPI? {
+        return self.spotifyPlayer.getUserAPI()
     }
     
     func queueSongs(songs: [Song]) {

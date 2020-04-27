@@ -10,8 +10,6 @@ import UIKit
 import SwiftUI
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate, SPTSessionManagerDelegate {
- 
-    
 
     var window: UIWindow?
 
@@ -37,10 +35,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate, SPTSessionManagerDelega
            let tokenRefreshURL = URL(string: "https://gchatz-music-hub.herokuapp.com/api/refresh_token") {
             self.configuration.tokenSwapURL = tokenSwapURL
             self.configuration.tokenRefreshURL = tokenRefreshURL
-            self.configuration.playURI = ""
+//            self.configuration.playURI = ""
         }
         
         let manager = SPTSessionManager(configuration: self.configuration, delegate: self)
+        manager.alwaysShowAuthorizationDialog = false // CHANGE FOR DEBUG
         print("started session manager")
         return manager
     }()
@@ -60,8 +59,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate, SPTSessionManagerDelega
 //        }
 //        print(options)me
         
-        let parameters = PlayerController.shared.authorizationParameters(from: url)
-        print(parameters)
+        let parameters = Controller.shared.authorizationParameters(from: url)
+//        print(parameters)
         
         if let _ = parameters?["code"] {
             let options_new: [UIApplication.OpenURLOptionsKey: Any] = [
@@ -89,6 +88,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate, SPTSessionManagerDelega
         // Create the SwiftUI view that provides the window contents.
         
         let requestedScopes: SPTScope = [.appRemoteControl]
+        
+//        PlayerController.shared.reactivate()
+//        print(PlayerController.shared.spotifyPlayer.appRemote.connected)
+        
         self.sessionManager.initiateSession(with: requestedScopes, options: .default)
         print("initiated session")
 
@@ -114,14 +117,14 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate, SPTSessionManagerDelega
         // Called when the scene has moved from an inactive state to an active state.
         // Use this method to restart any tasks that were paused (or not yet started) when the scene was inactive.
         
-        /*
-        print(self.appRemote.connectionParameters)
-        print(self.appRemote.connectionParameters.accessToken)
-        print(self.appRemote.connectionParameters.authenticationMethods)
         
-        DispatchQueue.main.async { [weak self] in
-            self?.appRemote.connect()
-        }*/
+//        print(self.appRemote.connectionParameters)
+//        print(self.appRemote.connectionParameters.accessToken)
+//        print(self.appRemote.connectionParameters.authenticationMethods)
+        
+//        DispatchQueue.main.async { [weak self] in
+//            self?.appRemote.connect()
+//        }
         
     }
 
@@ -152,7 +155,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate, SPTSessionManagerDelega
         //print(self.appRemote.connectionParameters.accessToken)
         
         DispatchQueue.main.async {
-            PlayerController.shared.setSpotifyAccessTokenAndConnect(accessToken: session.accessToken)
+            Controller.shared.setSpotifyAccessTokenAndConnect(accessToken: session.accessToken)
             print("App remote connecting ...")
             //self.appRemote.connect()
         }
@@ -167,8 +170,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate, SPTSessionManagerDelega
         print(session)
         
         DispatchQueue.main.async {
-            PlayerController.shared.setSpotifyAccessTokenAndConnect(accessToken: session.accessToken)
-            print("Spotify connected: ", PlayerController.shared.spotifyConnected())
+            Controller.shared.setSpotifyAccessTokenAndConnect(accessToken: session.accessToken)
+            print("Spotify connected: ", Controller.shared.spotifyConnected())
             //self.appRemote.connect()
         }
         print("session renewed!")
