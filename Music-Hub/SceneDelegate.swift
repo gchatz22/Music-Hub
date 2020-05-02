@@ -10,7 +10,7 @@ import UIKit
 import SwiftUI
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate, SPTSessionManagerDelegate {
-
+    
     var window: UIWindow?
 
     static private let kAccessTokenKey = "access-token-key"
@@ -35,7 +35,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate, SPTSessionManagerDelega
            let tokenRefreshURL = URL(string: "https://gchatz-music-hub.herokuapp.com/api/refresh_token") {
             self.configuration.tokenSwapURL = tokenSwapURL
             self.configuration.tokenRefreshURL = tokenRefreshURL
-//            self.configuration.playURI = ""
+            self.configuration.playURI = ""
         }
         
         let manager = SPTSessionManager(configuration: self.configuration, delegate: self)
@@ -92,10 +92,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate, SPTSessionManagerDelega
 //        PlayerController.shared.reactivate()
 //        print(PlayerController.shared.spotifyPlayer.appRemote.connected)
         
-        self.sessionManager.initiateSession(with: requestedScopes, options: .default)
-        print("initiated session")
+//        self.sessionManager.initiateSession(with: requestedScopes, options: .default)
+//        print("initiated session")
 
-        let contentView = ContentView()
+        let contentView = IntroSwiftUIView()
         // Use a UIHostingController as window root view controller.
         if let windowScene = scene as? UIWindowScene {
             let window = UIWindow(windowScene: windowScene)
@@ -156,7 +156,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate, SPTSessionManagerDelega
         
         DispatchQueue.main.async {
             Controller.shared.setSpotifyAccessTokenAndConnect(accessToken: session.accessToken)
-            print("App remote connecting ...")
             //self.appRemote.connect()
         }
         print("session initiated!")
