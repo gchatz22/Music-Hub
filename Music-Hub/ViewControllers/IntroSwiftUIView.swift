@@ -16,7 +16,7 @@ struct IntroSwiftUIView: View {
                 Spacer()
                 
                 NavigationLink(destination: SignUpSwiftUIView()){
-                    NavTextField(field:"SIGN UP")
+                    NavTextField(field:"NEW USER")
                 }
                 .navigationBarTitle("")
                 .padding()

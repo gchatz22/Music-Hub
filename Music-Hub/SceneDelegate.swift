@@ -79,7 +79,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate, SPTSessionManagerDelega
         print("opened url")
 
     }
-    
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
@@ -89,20 +88,39 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate, SPTSessionManagerDelega
         
         let requestedScopes: SPTScope = [.appRemoteControl]
         
+        // WILL UNCOMMENT THESE SOON
+        
 //        PlayerController.shared.reactivate()
 //        print(PlayerController.shared.spotifyPlayer.appRemote.connected)
         
-//        self.sessionManager.initiateSession(with: requestedScopes, options: .default)
-//        print("initiated session")
-
-        let contentView = IntroSwiftUIView()
+        self.sessionManager.initiateSession(with: requestedScopes, options: .default)
+        print("initiated session")
+        
+        
         // Use a UIHostingController as window root view controller.
         if let windowScene = scene as? UIWindowScene {
             let window = UIWindow(windowScene: windowScene)
-            window.rootViewController = UIHostingController(rootView: contentView)
             
-            self.window = window
-            window.makeKeyAndVisible()
+            window.rootViewController = UIHostingController(rootView: LoadingUp())
+            
+            let devRef = Database.getRef(collection: "devices", uid: Database.device)
+            
+            devRef.getDocument { (document, error) in
+                let logged_in = document?.exists ?? false
+                
+                if (logged_in == true){
+                    print("You are already authenticated in this device")
+                    window.rootViewController = UIHostingController(rootView: HomeSwiftUIView())
+                    Database.setLocalUserId(uid: document!.get("user_ref_id") as! String)
+                    Database.setActive(active: true)
+                } else {
+                    print("You need to authenticate")
+                    window.rootViewController = UIHostingController(rootView: IntroSwiftUIView())
+                }
+                
+                self.window = window
+                window.makeKeyAndVisible()
+            }
         }
     }
 
@@ -111,6 +129,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate, SPTSessionManagerDelega
         // This occurs shortly after the scene enters the background, or when its session is discarded.
         // Release any resources associated with this scene that can be re-created the next time the scene connects.
         // The scene may re-connect later, as its session was not neccessarily discarded (see `application:didDiscardSceneSessions` instead).
+        print("sceneDidDisconnect")
+        Database.setActive(active: false)
     }
 
     func sceneDidBecomeActive(_ scene: UIScene) {
@@ -126,26 +146,37 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate, SPTSessionManagerDelega
 //            self?.appRemote.connect()
 //        }
         
+//        print("sceneDidBecomeActive")
+//        Database.setActive(active: true)
     }
 
     func sceneWillResignActive(_ scene: UIScene) {
         // Called when the scene will move from an active state to an inactive state.
         // This may occur due to temporary interruptions (ex. an incoming phone call).
+        
         /*
         DispatchQueue.main.async { [weak self] in
             self?.appRemote.disconnect()
         }*/
+        
+//        print("sceneWillResignActive")
     }
 
     func sceneWillEnterForeground(_ scene: UIScene) {
         // Called as the scene transitions from the background to the foreground.
         // Use this method to undo the changes made on entering the background.
+        
+//        print("sceneWillEnterForeground")
+//        Database.setActive(active: true)
     }
 
     func sceneDidEnterBackground(_ scene: UIScene) {
         // Called as the scene transitions from the foreground to the background.
         // Use this method to save data, release shared resources, and store enough scene-specific state information
         // to restore the scene back to its current state.
+        
+//        print("sceneDidEnterBackground")
+//        Database.setActive(active: false)
     }
     
     

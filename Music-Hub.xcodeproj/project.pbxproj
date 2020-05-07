@@ -17,6 +17,10 @@
 		956F80442450706D004F5EBA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 956F80422450706D004F5EBA /* LaunchScreen.storyboard */; };
 		956F804F2450706D004F5EBA /* Music_HubTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 956F804E2450706D004F5EBA /* Music_HubTests.swift */; };
 		956F805A2450706D004F5EBA /* Music_HubUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 956F80592450706D004F5EBA /* Music_HubUITests.swift */; };
+		956FF283245DA56A006CA791 /* SignUpUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 956FF282245DA56A006CA791 /* SignUpUtils.swift */; };
+		956FF285245EC4B5006CA791 /* Database.swift in Sources */ = {isa = PBXBuildFile; fileRef = 956FF284245EC4B5006CA791 /* Database.swift */; };
+		956FF287245ED9E0006CA791 /* Keyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 956FF286245ED9E0006CA791 /* Keyboard.swift */; };
+		956FF2892460DF51006CA791 /* LoadingUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 956FF2882460DF51006CA791 /* LoadingUp.swift */; };
 		95854B9F245AF7870054BFC0 /* IntroSwiftUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95854B9E245AF7870054BFC0 /* IntroSwiftUIView.swift */; };
 		95854BA3245AF7A00054BFC0 /* LoginSwiftUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95854BA2245AF7A00054BFC0 /* LoginSwiftUIView.swift */; };
 		95A33384245CAA7200C3085D /* SignUpSwiftUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A33383245CAA7200C3085D /* SignUpSwiftUIView.swift */; };
@@ -72,6 +76,10 @@
 		956F805B2450706D004F5EBA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		956F8067245071F5004F5EBA /* SpotifyiOS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SpotifyiOS.framework; sourceTree = "<group>"; };
 		956F806D2450728A004F5EBA /* Music-Hub-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Music-Hub-Bridging-Header.h"; sourceTree = "<group>"; };
+		956FF282245DA56A006CA791 /* SignUpUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpUtils.swift; sourceTree = "<group>"; };
+		956FF284245EC4B5006CA791 /* Database.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Database.swift; sourceTree = "<group>"; };
+		956FF286245ED9E0006CA791 /* Keyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keyboard.swift; sourceTree = "<group>"; };
+		956FF2882460DF51006CA791 /* LoadingUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingUp.swift; sourceTree = "<group>"; };
 		95854B9E245AF7870054BFC0 /* IntroSwiftUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroSwiftUIView.swift; sourceTree = "<group>"; };
 		95854BA2245AF7A00054BFC0 /* LoginSwiftUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LoginSwiftUIView.swift; path = "/Users/giannischatziveroglou/Desktop/Music-Hub/Music-Hub/ViewControllers/LoginSwiftUIView.swift"; sourceTree = "<absolute>"; };
 		95A33383245CAA7200C3085D /* SignUpSwiftUIView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpSwiftUIView.swift; sourceTree = "<group>"; };
@@ -161,7 +169,9 @@
 				95CB9F9D2455F28E00AD0C75 /* Controller.swift */,
 				95CB9F9F2455F2A600AD0C75 /* User.swift */,
 				95CB9FA12455F2B300AD0C75 /* Player.swift */,
+				956FF284245EC4B5006CA791 /* Database.swift */,
 				95D52E0524536EEA00397DA0 /* Song.swift */,
+				956FF286245ED9E0006CA791 /* Keyboard.swift */,
 				95D52DF5245110A200397DA0 /* Constants.swift */,
 				956F803D2450706D004F5EBA /* Assets.xcassets */,
 				956F80422450706D004F5EBA /* LaunchScreen.storyboard */,
@@ -202,8 +212,10 @@
 		95A68D1C245A3CF700E90EF0 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				956FF2882460DF51006CA791 /* LoadingUp.swift */,
 				95854B9E245AF7870054BFC0 /* IntroSwiftUIView.swift */,
 				95A33383245CAA7200C3085D /* SignUpSwiftUIView.swift */,
+				956FF282245DA56A006CA791 /* SignUpUtils.swift */,
 				95854BA2245AF7A00054BFC0 /* LoginSwiftUIView.swift */,
 				956F803B2450706C004F5EBA /* HomeSwiftUIView.swift */,
 			);
@@ -468,10 +480,14 @@
 				95D52E0624536EEA00397DA0 /* Song.swift in Sources */,
 				95854B9F245AF7870054BFC0 /* IntroSwiftUIView.swift in Sources */,
 				95854BA3245AF7A00054BFC0 /* LoginSwiftUIView.swift in Sources */,
+				956FF287245ED9E0006CA791 /* Keyboard.swift in Sources */,
+				956FF2892460DF51006CA791 /* LoadingUp.swift in Sources */,
 				95A33384245CAA7200C3085D /* SignUpSwiftUIView.swift in Sources */,
 				956F803C2450706C004F5EBA /* HomeSwiftUIView.swift in Sources */,
 				95CB9FA02455F2A600AD0C75 /* User.swift in Sources */,
 				95D52DF6245110A200397DA0 /* Constants.swift in Sources */,
+				956FF285245EC4B5006CA791 /* Database.swift in Sources */,
+				956FF283245DA56A006CA791 /* SignUpUtils.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

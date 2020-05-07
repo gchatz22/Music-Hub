@@ -11,59 +11,93 @@ import SwiftUI
 
 struct SignUpSwiftUIView: View {
 
-    @State var email : String = ""
-    @State var password : String = ""
+    @State var firstName : String = "Giannis"
+    @State var lastName : String = "Chatziveroglou"
+    @State var email : String = "gchatz@mit.edu"
+    @State var password : String = "Lil-frog2290??"
+    
+    @State var transitionActive : Bool = false;
     @ObservedObject var hide = HideToggle()
+    
 
 
     var body: some View {
-        VStack{
-            
-            Spacer()
-            .frame(height: 100)
-            
-            HStackText(field: "Email")
-            TextField("Email", text: $email)
-                .padding()
-                .foregroundColor(.white)
-                .background(Constants.textFieldColor)
-                .cornerRadius(5.0)
-                .frame(maxWidth: 350)
-            
-            HStackText(field: "Password")
-            HStack{
-                if (self.hide.flag){
-                 SecureField("Pasword", text: $password)
-                    .padding()
-                    .background(Constants.textFieldColor)
-                    .cornerRadius(5.0)
-                    .frame(maxWidth: 350)
-                    .foregroundColor(.white)
-                    .overlay(HideButton(inst:hide), alignment: .trailing)
-                } else {
-                    TextField("Pasword", text: $password)
-                    .padding()
-                    .background(Constants.textFieldColor)
-                    .cornerRadius(5.0)
-                    .frame(maxWidth: 350)
-                    .foregroundColor(.white)
-                    .overlay(HideButton(inst:hide), alignment: .trailing)
+        ScrollView(){
+            VStack(){
+                Spacer()
+                    .frame(height: 50)
+                
+                Group{
+                    HStackText(field: "First Name")
+                    TextField("", text: $firstName)
+                        .padding()
+                        .foregroundColor(.white)
+                        .background(Constants.textFieldColor)
+                        .cornerRadius(5.0)
+                        .frame(maxWidth: 350)
+
+                    HStackText(field: "Last Name")
+                    TextField("", text: $lastName)
+                        .padding()
+                        .foregroundColor(.white)
+                        .background(Constants.textFieldColor)
+                        .cornerRadius(5.0)
+                        .frame(maxWidth: 350)
+                    
+                    HStackText(field: "Email")
+                    TextField("", text: $email)
+                        .padding()
+                        .foregroundColor(.white)
+                        .background(Constants.textFieldColor)
+                        .cornerRadius(5.0)
+                        .frame(maxWidth: 350)
                 }
-            }
-            
-            NavigationLink(destination: HomeSwiftUIView()){
-                NavTextField(field:"SIGN UP")
-            }
-            .navigationBarTitle("")
-            .padding()
-            .foregroundColor(.white)
-            
-            
-            Spacer()
+                
+                HStackText(field: "Password")
+                HStack{
+                    if (self.hide.flag){
+                     SecureField("", text: $password)
+                        .padding()
+                        .background(Constants.textFieldColor)
+                        .cornerRadius(5.0)
+                        .frame(maxWidth: 350)
+                        .foregroundColor(.white)
+                        .overlay(HideButton(inst:hide), alignment: .trailing)
+                    } else {
+                        TextField("", text: $password)
+                        .padding()
+                        .background(Constants.textFieldColor)
+                        .cornerRadius(5.0)
+                        .frame(maxWidth: 350)
+                        .foregroundColor(.white)
+                        .overlay(HideButton(inst:hide), alignment: .trailing)
+
+                        
+                    }
+                }
+                
+                Button(action: {
+                    let res = SignUpUtils.makeNewUser(email: self.email, password: self.password, firstName: self.firstName, lastName: self.lastName)
+                    if res != nil{
+                        // Display error message
+                    } else {
+                        self.transitionActive = true;
+                    }
+                }){
+                    NavTextField(field:"SIGN UP")
+                }.padding()
+                
+                NavigationLink(destination: HomeSwiftUIView(), isActive: $transitionActive){
+                    Text("")
+                }
+                
+                Spacer()
+            }.padding()
         }
         .frame(maxWidth: .infinity)
         .background(Constants.mainColor)
         .edgesIgnoringSafeArea([.top, .bottom])
+        .KeyboardResponsive()
     }
 }
 

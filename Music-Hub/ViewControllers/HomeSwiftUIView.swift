@@ -19,6 +19,7 @@ struct HomeSwiftUIView: View {
         .frame(maxWidth: .infinity)
         .background(Constants.mainColor)
         .edgesIgnoringSafeArea([.top, .bottom])
+        .navigationBarBackButtonHidden(true)
     }
 }
 
