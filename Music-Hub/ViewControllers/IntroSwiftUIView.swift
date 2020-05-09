@@ -33,7 +33,7 @@ struct IntroSwiftUIView: View {
             .background(Constants.mainColor)
             .edgesIgnoringSafeArea([.top, .bottom])
         }
-        .accentColor(.white)
+        .navigationBarBackButtonHidden(true)
     }
 }
 
@@ -46,6 +46,7 @@ struct NavTextField: View {
             .fontWeight(.medium)
             .padding()
             .frame(maxWidth: 300)
+            .foregroundColor(.white)
             .background(Constants.buttonColor)
             .cornerRadius(25.0)
     }

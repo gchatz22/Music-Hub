@@ -88,7 +88,7 @@ struct SignUpSwiftUIView: View {
                 }.padding()
                 
                 NavigationLink(destination: HomeSwiftUIView(), isActive: $transitionActive){
-                    Text("")
+                    EmptyView()
                 }
                 
                 Spacer()

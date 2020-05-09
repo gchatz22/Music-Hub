@@ -12,9 +12,8 @@ import SwiftUI
 class SceneDelegate: UIResponder, UIWindowSceneDelegate, SPTSessionManagerDelegate {
     
     var window: UIWindow?
-
-    static private let kAccessTokenKey = "access-token-key"
     
+    static private let kAccessTokenKey = "access-token-key"
 
     var accessToken = UserDefaults.standard.string(forKey: kAccessTokenKey) {
         didSet {
@@ -45,6 +44,13 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate, SPTSessionManagerDelega
     }()
     
     
+    func initiateSPTSession(){
+        let requestedScopes: SPTScope = [.appRemoteControl]
+        self.sessionManager.initiateSession(with: requestedScopes, options: .default)
+        print("initiated session")
+    }
+    
+    
     func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
         print("opening url from scene")
 //        print(URLContexts.first?.url)
@@ -57,7 +63,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate, SPTSessionManagerDelega
 //            print("cant get options")
 //            return
 //        }
-//        print(options)me
+//        print(options)
         
         let parameters = Controller.shared.authorizationParameters(from: url)
 //        print(parameters)
@@ -79,6 +85,13 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate, SPTSessionManagerDelega
         print("opened url")
 
     }
+    
+    func redirect(view: AnyView){
+        if let window = self.window {
+            window.rootViewController = UIHostingController(rootView: view)
+            window.makeKeyAndVisible()
+        }
+    }
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
@@ -86,40 +99,27 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate, SPTSessionManagerDelega
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
         // Create the SwiftUI view that provides the window contents.
         
-        let requestedScopes: SPTScope = [.appRemoteControl]
-        
-        // WILL UNCOMMENT THESE SOON
-        
-//        PlayerController.shared.reactivate()
-//        print(PlayerController.shared.spotifyPlayer.appRemote.connected)
-        
-        self.sessionManager.initiateSession(with: requestedScopes, options: .default)
-        print("initiated session")
-        
         
         // Use a UIHostingController as window root view controller.
         if let windowScene = scene as? UIWindowScene {
             let window = UIWindow(windowScene: windowScene)
-            
-            window.rootViewController = UIHostingController(rootView: LoadingUp())
+            self.window = window
             
             let devRef = Database.getRef(collection: "devices", uid: Database.device)
-            
+
             devRef.getDocument { (document, error) in
                 let logged_in = document?.exists ?? false
-                
+
                 if (logged_in == true){
                     print("You are already authenticated in this device")
-                    window.rootViewController = UIHostingController(rootView: HomeSwiftUIView())
-                    Database.setLocalUserId(uid: document!.get("user_ref_id") as! String)
-                    Database.setActive(active: true)
+                    self.redirect(view: AnyView(HomeSwiftUIView()))
+                    Database.connectedUserSetup(user_uid: document!.get("user_ref_id") as! String)
                 } else {
                     print("You need to authenticate")
-                    window.rootViewController = UIHostingController(rootView: IntroSwiftUIView())
+                    self.redirect(view: AnyView(IntroSwiftUIView()))
                 }
-                
-                self.window = window
-                window.makeKeyAndVisible()
+
+
             }
         }
     }

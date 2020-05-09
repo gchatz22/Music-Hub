@@ -10,15 +10,28 @@ import SwiftUI
 
 struct HomeSwiftUIView: View {
     
+    @State var selection = 1
+    
     var body: some View {
-        VStack{
-            Spacer()
-            Text("You are in the homepage").foregroundColor(.white)
-            Spacer()
+        TabView(selection: $selection) {
+            ConnectView()
+                .tabItem {
+                    Image(systemName: "heart.fill")
+//                    Text("Connect")
+            }.tag(1)
+            
+            PartyView()
+                .tabItem {
+                    Image(systemName: "list.dash")
+//                    Text("Party")
+                }.tag(2)
+
+            SettingsView()
+                .tabItem {
+                    Image(systemName: "square.and.pencil")
+//                    Text("Settings")
+                }.tag(3)
         }
-        .frame(maxWidth: .infinity)
-        .background(Constants.mainColor)
-        .edgesIgnoringSafeArea([.top, .bottom])
         .navigationBarBackButtonHidden(true)
     }
 }

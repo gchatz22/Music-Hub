@@ -93,6 +93,7 @@ class Player: NSObject, SPTAppRemoteDelegate, SPTAppRemotePlayerStateDelegate{
     
     func appRemoteDidEstablishConnection(_ appRemote: SPTAppRemote) {
         print("App remote connected: ", Controller.shared.spotifyConnected())
+        Database.streamingConnected(connected: true)
         
         self.appRemote.playerAPI?.delegate = self
         self.appRemote.playerAPI?.subscribe(toPlayerState: { (result, error) in

@@ -28,8 +28,7 @@ class SignUpUtils {
                 } else {
 //                    print(result!)
                     uid = result!.user.uid
-                    Database.setLocalUserId(uid: uid)
-                    Database.setActive(active: true)
+                    Database.connectedUserSetup(user_uid: uid)
                     error = nil
                 }
                 

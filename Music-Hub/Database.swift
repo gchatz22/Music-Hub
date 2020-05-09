@@ -9,7 +9,7 @@
 import Foundation
 import Firebase
 import FirebaseFirestore
-//import SwiftUI
+import FirebaseAuth
 
 class Database{
     
@@ -39,6 +39,17 @@ class Database{
         }
     }
     
+    static func connectedUserSetup(user_uid: String){
+        self.setLocalUserId(uid: user_uid)
+        self.setActive(active: true)
+        self.streamingConnected(connected: false)
+        AppState.initiateSPTSession()
+    }
+    
+    static func streamingConnected(connected: Bool){
+        self.db.collection("users").document(self.user_id).updateData([ "streaming_connected": connected ])
+    }
+    
     static func setLocalUserId(uid: String){
         print("set user_id to", uid)
         self.user_id = uid
@@ -46,6 +57,20 @@ class Database{
     
     static func getRef(collection: String, uid: String) -> DocumentReference{
         return db.collection(collection).document(uid)
+    }
+    
+    static func logout(){
+        print("logging out")
+        
+        self.setLocalUserId(uid: "")
+        self.setActive(active: false)
+        
+        let firebaseAuth = Auth.auth()
+        do {
+          try firebaseAuth.signOut()
+        } catch let signOutError as NSError {
+          print ("Error signing out: %@", signOutError)
+        }
     }
     
     static func setActive(active: Bool){
