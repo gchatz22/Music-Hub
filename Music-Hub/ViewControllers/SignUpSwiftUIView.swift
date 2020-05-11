@@ -16,8 +16,8 @@ struct SignUpSwiftUIView: View {
     @State var email : String = "gchatz@mit.edu"
     @State var password : String = "Lil-frog2290??"
     
-    @State var transitionActive : Bool = false;
-    @ObservedObject var hide = HideToggle()
+    @ObservedObject var utils: AuthUtils = AuthUtils()
+    @ObservedObject var hide: HideToggle = HideToggle()
     
 
 
@@ -76,20 +76,20 @@ struct SignUpSwiftUIView: View {
                     }
                 }
                 
+                if (utils.error != nil){
+                    Text(utils.error! as String)
+                        .foregroundColor(.white)
+                }
+                
                 Button(action: {
-                    let res = SignUpUtils.makeNewUser(email: self.email, password: self.password, firstName: self.firstName, lastName: self.lastName)
-                    if res != nil{
+                    self.utils.makeNewUser(email: self.email, password: self.password, firstName: self.firstName, lastName: self.lastName)
+                    if self.utils.error != nil{
                         // Display error message
-                    } else {
-                        self.transitionActive = true;
+                        print(self.utils.error!)
                     }
                 }){
                     NavTextField(field:"SIGN UP")
                 }.padding()
-                
-                NavigationLink(destination: HomeSwiftUIView(), isActive: $transitionActive){
-                    EmptyView()
-                }
                 
                 Spacer()
             }.padding()

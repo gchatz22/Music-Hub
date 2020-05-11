@@ -17,6 +17,7 @@ struct Constants {
     static let sessionKey = "spotifySessionKey"
     
     static let mainColor: Color = Color(red: 25/255, green: 20/255, blue: 20/255)
+//    static let mainColor: Color = Color(.white)
     static let buttonColor: Color = Color(red: 30/255, green: 215/255, blue: 96/255)
     static let textFieldColor: Color = Color(red: 64/255, green: 64/255, blue: 64/255)
 }

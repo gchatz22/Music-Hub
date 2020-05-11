@@ -13,7 +13,6 @@ import SwiftUI
 
 class AuthUtils: ObservableObject {
     
-    @Published var transitionActive: Bool = false
     @Published var error: String? = nil
     
     func makeNewUser(email: String, password: String, firstName: String, lastName: String){
@@ -33,7 +32,7 @@ class AuthUtils: ObservableObject {
                 } else {
                     // Create User
                     print("Creating User")
-                    self.transitionActive = true
+                    AppState.enterHome()
                     uid = result!.user.uid
                     Database.connectedUserSetup(user_uid: uid)
                     Database.signUpUser(email: email, uid: uid, firstName: firstName, lastName: lastName)
@@ -69,5 +68,21 @@ class AuthUtils: ObservableObject {
         let passwordTest = NSPredicate(format: "SELF MATCHES %@", "^(?=.*[a-z])(?=.*[$@$#!%*?&])[A-Za-z\\d$@$#!%*?&]{8,}")
         return passwordTest.evaluate(with: password)
     }
+    
+    func logInUser(email: String, password: String){
+        Auth.auth().signIn(withEmail: email, password: password) { authResult, error in
+            
+            if error != nil{
+                print(error!.localizedDescription)
+                self.error = error!.localizedDescription
+            } else {
+                print(authResult!)
+                AppState.enterHome()
+                
+            }
+        }
+    }
+    
+    
     
 }

@@ -14,15 +14,29 @@ import FirebaseAuth
 class Database{
     
     public static let device = [UIDevice.current.identifierForVendor! .uuidString][0]
-    private static var user_id: String = ""
     private static let db = Firestore.firestore()
     
     init(){
         FirebaseApp.configure()
     }
     
+    static func currentUserID() -> String?{
+        let user = Auth.auth().currentUser
+//        print(user)
+        
+        if user == nil{
+            return nil
+        } else {
+            return user!.uid
+        }
+        
+    }
+    
     static func signUpUser(email: String, uid: String, firstName: String, lastName: String){
-        let newDoc = self.db.collection("users").addDocument(data: ["email": email, "uid": uid, "firstName": firstName, "lastName": lastName, "device": [self.device]]) { (err) in
+        
+        let userDoc = self.createRef(collection: "users", uid: uid)
+        
+        userDoc.setData(["email": email, "firstName": firstName, "lastName": lastName]) { (err) in
             if err != nil {
                 print(err!.localizedDescription)
             } else {
@@ -30,39 +44,26 @@ class Database{
             }
         }
         
-        self.db.collection("devices").document(self.device).setData(["user_ref_id": newDoc.documentID]){ (err) in
-            if err != nil {
-                print(err!.localizedDescription)
-            } else {
-                print("Also made new device/user reference")
-            }
-        }
     }
     
     static func connectedUserSetup(user_uid: String){
-        self.setLocalUserId(uid: user_uid)
         self.setActive(active: true)
         self.streamingConnected(connected: false)
-        AppState.initiateSPTSession()
+//        AppState.initiateSPTSession()
     }
     
     static func streamingConnected(connected: Bool){
-        self.db.collection("users").document(self.user_id).updateData([ "streaming_connected": connected ])
+        let uid = self.currentUserID()!
+        self.db.collection("users").document(uid).updateData([ "streaming_connected": connected ])
     }
     
-    static func setLocalUserId(uid: String){
-        print("set user_id to", uid)
-        self.user_id = uid
-    }
-    
-    static func getRef(collection: String, uid: String) -> DocumentReference{
+    static func createRef(collection: String, uid: String) -> DocumentReference{
         return db.collection(collection).document(uid)
     }
     
     static func logout(){
         print("logging out")
         
-        self.setLocalUserId(uid: "")
         self.setActive(active: false)
         
         let firebaseAuth = Auth.auth()
@@ -71,11 +72,15 @@ class Database{
         } catch let signOutError as NSError {
           print ("Error signing out: %@", signOutError)
         }
+        
+        AppState.logout()
+
     }
     
     static func setActive(active: Bool){
-        if self.user_id != "" {
-            self.db.collection("users").document(self.user_id).updateData([ "active": active ])
+        let uid = self.currentUserID()!
+        if uid != "" {
+            self.db.collection("users").document(uid).updateData([ "active": active ])
             print("User active:", active)
         }
 //        else {

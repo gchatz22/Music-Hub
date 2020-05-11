@@ -82,12 +82,11 @@ class Player: NSObject, SPTAppRemoteDelegate, SPTAppRemotePlayerStateDelegate{
         print("playbackPosition", playerState.playbackPosition)
     }
     
-    func setAccessTokenAndConnect(accessToken: String) -> Bool{
+    func setAccessTokenAndConnect(accessToken: String){
         self.accessToken = accessToken
         self.appRemote.connectionParameters.accessToken = accessToken
         print("App remote is connecting ...")
         self.appRemote.connect()
-        return self.appRemote.isConnected
     }
     
     
@@ -107,10 +106,10 @@ class Player: NSObject, SPTAppRemoteDelegate, SPTAppRemotePlayerStateDelegate{
     
     
     func appRemote(_ appRemote: SPTAppRemote, didDisconnectWithError error: Error?) {
-        print("disconnected")
+        print(error!.localizedDescription)
     }
     
     func appRemote(_ appRemote: SPTAppRemote, didFailConnectionAttemptWithError error: Error?) {
-        print("failed")
+        print(error!.localizedDescription)
     }
 }

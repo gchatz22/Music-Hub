@@ -18,6 +18,10 @@ class AppState: ObservableObject{
         AppState.delegate?.redirect(view: AnyView(IntroSwiftUIView()))
     }
     
+    static func enterHome(){
+        AppState.delegate?.redirect(view: AnyView(HomeSwiftUIView()))
+    }
+    
     static func initiateSPTSession(){
         AppState.delegate?.initiateSPTSession()
     }

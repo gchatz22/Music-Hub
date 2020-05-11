@@ -17,7 +17,6 @@ struct SettingsView: View {
             Spacer()
             Button(action: {
                 Database.logout()
-                AppState.logout()
             }){
                 Text("Logout")
             }.padding()
@@ -27,7 +26,6 @@ struct SettingsView: View {
         .frame(maxWidth: .infinity)
         .background(Constants.mainColor)
         .edgesIgnoringSafeArea([.top, .bottom])
-        .navigationBarTitle(Text("Settings"))
     }
 }
 

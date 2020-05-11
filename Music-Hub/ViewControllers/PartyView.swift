@@ -11,17 +11,18 @@ import SwiftUI
 struct PartyView: View {
     var body: some View {
         
-        VStack{
-            Spacer()
-            Text("Party View")
-                .foregroundColor(.white)
-            Spacer()
+        NavigationView{
+            VStack{
+                Spacer()
+                Text("Party View")
+                    .foregroundColor(.white)
+                Spacer()
+            }
+            .frame(maxWidth: .infinity)
+            .background(Color.green)
+            .edgesIgnoringSafeArea([.top, .bottom])
+            .navigationBarTitle("Party")
         }
-        .navigationBarTitle(Text("Party"))
-        .frame(maxWidth: .infinity)
-        .background(Constants.mainColor)
-        .edgesIgnoringSafeArea([.top, .bottom])
-        
         
     }
 }

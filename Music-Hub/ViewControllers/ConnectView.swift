@@ -25,7 +25,6 @@ struct ConnectView: View {
 //        .padding()
 //        .frame(maxWidth: .infinity)
 //        .edgesIgnoringSafeArea([.top, .bottom])
-        
         VStack{
             Spacer()
             Text("Connect View")
@@ -36,7 +35,6 @@ struct ConnectView: View {
         .frame(maxWidth: .infinity)
         .background(Constants.mainColor)
         .edgesIgnoringSafeArea([.top, .bottom])
-        
         
     }
 }

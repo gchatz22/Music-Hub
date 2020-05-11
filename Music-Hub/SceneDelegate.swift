@@ -105,22 +105,16 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate, SPTSessionManagerDelega
             let window = UIWindow(windowScene: windowScene)
             self.window = window
             
-            let devRef = Database.getRef(collection: "devices", uid: Database.device)
-
-            devRef.getDocument { (document, error) in
-                let logged_in = document?.exists ?? false
-
-                if (logged_in == true){
-                    print("You are already authenticated in this device")
-                    self.redirect(view: AnyView(HomeSwiftUIView()))
-                    Database.connectedUserSetup(user_uid: document!.get("user_ref_id") as! String)
-                } else {
-                    print("You need to authenticate")
-                    self.redirect(view: AnyView(IntroSwiftUIView()))
-                }
-
-
+            let user = Database.currentUserID()
+            
+            if user != nil{
+                print("You are already authenticated in this device")
+                self.redirect(view: AnyView(HomeSwiftUIView()))
+            } else {
+                print("You need to authenticate")
+                self.redirect(view: AnyView(IntroSwiftUIView()))
             }
+            
         }
     }
 
@@ -187,7 +181,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate, SPTSessionManagerDelega
         
         DispatchQueue.main.async {
             Controller.shared.setSpotifyAccessTokenAndConnect(accessToken: session.accessToken)
-            //self.appRemote.connect()
         }
         print("session initiated!")
     }
