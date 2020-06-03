@@ -10,7 +10,7 @@ import SwiftUI
 
 struct SettingsView: View {
     
-    @State var logout: Bool = false
+    @ObservedObject var user: User = User.shared
     
     var body: some View {
         VStack{
@@ -20,6 +20,21 @@ struct SettingsView: View {
             }){
                 Text("Logout")
             }.padding()
+            
+            if (user.streamingConnected == false) {
+                Button(action: {
+                    AppState.initiateSPTSession()
+                }){
+                    Text("Connect Spotify")
+                }.padding()
+            }
+            
+            Button(action: {
+                Controller.shared.playSong()
+            }){
+                Text("Play Song")
+            }.padding()
+            
             Spacer()
         }
         .navigationBarTitle(Text("Settings"))

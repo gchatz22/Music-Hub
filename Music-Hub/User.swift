@@ -9,10 +9,43 @@
 import Foundation
 
 
-class User : NSObject, SPTAppRemoteUserAPI, SPTAppRemoteUserAPIDelegate, SPTAppRemoteUserCapabilities{
+class User : NSObject, SPTAppRemoteUserAPI, SPTAppRemoteUserAPIDelegate, SPTAppRemoteUserCapabilities, ObservableObject, Identifiable{
+    
+    static let shared: User = User()
+    
+    var uid: String = ""
+    var firstName: String = ""
+    var lastName: String = ""
+    var email: String = ""
     
     var delegate: SPTAppRemoteUserAPIDelegate?
     var canPlayOnDemand: Bool = false
+    @Published var streamingConnected: Bool = false
+    @Published var friends: [User] = []
+    @Published var hosting: Bool = false
+
+    init (uid: String = "", firstName: String = "", lastName: String = "", email: String = ""){
+        self.uid = uid
+        self.firstName = firstName
+        self.lastName = lastName
+        self.email = email
+    }
+    
+    func setParams(uid: String = "", firstName: String = "", lastName: String = "", email: String = ""){
+        self.uid = uid
+        self.firstName = firstName
+        self.lastName = lastName
+        self.email = email
+        print("Set User params")
+    }
+
+    
+    
+    
+    
+    
+    
+    
     
     
     func fetchCapabilities(callback: SPTAppRemoteCallback? = nil) {

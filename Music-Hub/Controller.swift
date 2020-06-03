@@ -7,16 +7,30 @@
 //
 
 import Foundation
+import AVFoundation
 
 class Controller: NSObject {
     
+    public static var shared = Controller()
     private var spotifyPlayer: Player
     private var spotifyUser: User
-    public static var shared = Controller()
     
     override init (){
         spotifyPlayer = Player()
-        spotifyUser = User()
+        spotifyUser = User.shared
+    }
+    
+    func test(){
+        self.spotifyPlayer.appRemote.connect()
+        print("API", self.spotifyPlayer.appRemote.playerAPI)
+    }
+    
+    func playSong(){
+        print("playing song")
+//        self.spotifyPlayer.appRemote.playerAPI?.play("spotify:track:7egj375ez0KtF3bYCfAHdZ")
+        print(self.spotifyPlayer.appRemote.isConnected)
+//        self.spotifyPlayer.play()
+    
     }
     
     func authorizationParameters(from: URL) -> [String: String]? {

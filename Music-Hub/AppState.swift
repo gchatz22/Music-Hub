@@ -23,7 +23,7 @@ class AppState: ObservableObject{
     }
     
     static func initiateSPTSession(){
-        AppState.delegate?.initiateSPTSession()
+        SpotifyManager.shared.initiateSPTSession()
     }
     
 }

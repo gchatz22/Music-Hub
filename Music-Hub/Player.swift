@@ -36,7 +36,7 @@ class Player: NSObject, SPTAppRemoteDelegate, SPTAppRemotePlayerStateDelegate{
     func play() {
         handleConnection()
         DispatchQueue.main.async {
-            self.appRemote.playerAPI?.play("")
+            self.appRemote.playerAPI?.play("spotify:track:7egj375ez0KtF3bYCfAHdZ")
         }
     }
     
@@ -61,6 +61,12 @@ class Player: NSObject, SPTAppRemoteDelegate, SPTAppRemotePlayerStateDelegate{
             appRemote.connect()
         }
     }
+    
+    
+//    CHECK IF SPOTIFY IS ACTIVE
+//    SPTAppRemote.checkIfSpotifyAppIsActive({ (val) in
+//        print(val)
+//    })
     
     
     func playerStateDidChange(_ playerState: SPTAppRemotePlayerState) {
@@ -89,10 +95,8 @@ class Player: NSObject, SPTAppRemoteDelegate, SPTAppRemotePlayerStateDelegate{
         self.appRemote.connect()
     }
     
-    
     func appRemoteDidEstablishConnection(_ appRemote: SPTAppRemote) {
         print("App remote connected: ", Controller.shared.spotifyConnected())
-        Database.streamingConnected(connected: true)
         
         self.appRemote.playerAPI?.delegate = self
         self.appRemote.playerAPI?.subscribe(toPlayerState: { (result, error) in
@@ -110,6 +114,7 @@ class Player: NSObject, SPTAppRemoteDelegate, SPTAppRemotePlayerStateDelegate{
     }
     
     func appRemote(_ appRemote: SPTAppRemote, didFailConnectionAttemptWithError error: Error?) {
+        print(error)
         print(error!.localizedDescription)
     }
 }

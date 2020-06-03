@@ -34,8 +34,9 @@ class AuthUtils: ObservableObject {
                     print("Creating User")
                     AppState.enterHome()
                     uid = result!.user.uid
-                    Database.connectedUserSetup(user_uid: uid)
-                    Database.signUpUser(email: email, uid: uid, firstName: firstName, lastName: lastName)
+                    
+                    User.shared.uid = uid
+                    Database.signUpUserInDB(email: email, uid: uid, firstName: firstName, lastName: lastName)
                 }
                 
             }
@@ -76,8 +77,18 @@ class AuthUtils: ObservableObject {
                 print(error!.localizedDescription)
                 self.error = error!.localizedDescription
             } else {
-                print(authResult!)
                 AppState.enterHome()
+                
+                let ref = Database.createRef(collection: "users", uid: authResult!.user.uid)
+                
+                ref.getDocument { (res, err) in
+                    if err != nil{
+                        self.error = error!.localizedDescription
+                    } else {
+                        let data = res!.data()
+                        User.shared.setParams(uid: data!["uid"] as! String, firstName: data!["firstName"] as! String, lastName: data!["lastName"] as! String, email: data!["email"] as! String)
+                    }
+                }
                 
             }
         }
